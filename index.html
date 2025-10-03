@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MlimiZone Product Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIYb0V7em2Q88e73PTqnyV1Zdas4Y+0g2gV1lAD8u9rFQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img id="logo" src="images/logo.png" alt="Logo">
+            <h2>MlimiZone Docs</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#system-overview">System Overview</a></li>
+                <li><a href="#installation">Installation Guide</a></li>
+                <li><a href="#configuration">Configuration Guide</a></li>
+                <li><a href="#usage">Usage Guide</a></li>
+                <li><a href="#api">API Documentation</a></li>
+                <li><a href="#database">Database Schema</a></li>
+                <li><a href="#testing">Testing</a></li>
+                <li><a href="#deployment">Deployment</a></li>
+                <li><a href="#support">Support & Maintenance</a></li>
+                <li><a href="#change-log">Change Log</a></li>
+                <li><a href="#glossary">Glossary</a></li>
+            </ul>
+        </div>
+        <div class="main-content-wrapper">
+            <header class="header">
+                <div class="logo">MlimiZone</div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search documentation...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="profile-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+            <div class="main-content">
+                <h1>MlimiZone Product Documentation</h1>
+                <p>MlimiZone is a USSD-based platform designed to connect farmers and wholesalers in Malawi,
+                    streamlining agricultural trade. Farmers can list produce (Maize, Peas, Rice, Ground nuts),
+                    check market prices, and receive bookings, while wholesalers can browse listings, book produce,
+                    and make payments via M-Pesa. The platform supports intuitive navigation (0 for Back, 00 for Main
+                    menu)
+                    and sends SMS notifications for key actions. This documentation provides comprehensive guidance on
+                    the system's features, installation, configuration, usage, and maintenance.</p>
+
+                <h2 id="introduction">Introduction</h2>
+                <p>Purpose: MlimiZone aims to streamline agricultural trade in Malawi by providing an accessible USSD
+                    interface for farmers and wholesalers.<br>
+                    Scope: Covers user registration, produce listing, market price viewing, booking, and payment
+                    processing.<br>
+                    Audience: Farmers, wholesalers, administrators, and developers maintaining the system.</p>
+
+                <h2 id="introduction">Features</h2>
+                <p>1. Clear and Concise: Written in simple language accessible to all users.<br>
+
+                    2. Comprehensive Coverage: Includes system overview, installation, configuration, usage, API, database
+                    schema, testing, deployment, and support.
+                    <br>
+                    3. User-Centered: Tailored to the needs of farmers, wholesalers, admins, and developers.
+                    <br>
+                    4. Visual Aids: Diagrams (e.g., system architecture, ER diagram), code snippets, and screenshots.
+                    <br>
+                    5. Interactive Elements: Expandable sections, tabs for API versions, and copy-to-clipboard buttons for
+                    code. </p>
+
+                <section class="prd-section">
+                    <h2 id="prd-summary">Product Requirements Summary</h2>
+                    <div class="prd-card">
+                        <h3>🎯 Core Problem</h3>
+                        <p>Smallholder farmers in rural Malawi lack real-time market price info and direct buyer access,
+                            leading to low incomes, post-harvest waste, and reliance on exploitative intermediaries.
+                            Wholesalers struggle to connect digitally due to farmers’ use of basic phones.</p>
+                    </div>
+
+                    <div class="prd-card">
+                        <h3>💡 Proposed Solution</h3>
+                        <p>A <strong>USSD-based digital marketplace</strong> enabling farmers and wholesalers to
+                            register, list crops, view verified market prices, place orders, and process secure mobile
+                            payments — all via basic feature phones using *123#.</p>
+                    </div>
+
+                    <div class="prd-card">
+                        <h3>✅ Key Success Metrics</h3>
+                        <ul>
+                            <li>100 farmers + 50 wholesalers registered in 3 months</li>
+                            <li>75% farmer & 65% wholesaler monthly active usage</li>
+                            <li>150+ crop listings/month</li>
+                            <li>90% order-to-payment completion rate</li>
+                            <li>98%+ system uptime</li>
+                        </ul>
+                    </div>
+
+                    <h3>User Flow Diagrams</h3>
+                    <div class="diagram-container">
+                        <img src="images/flow.png" alt="Farmer User Flow">
+                    </div>
+
+                    <div class="note">
+                        <i class="fas fa-info-circle"></i>
+                        Full PRD available internally. Diagrams illustrate end-to-end journeys for farmers, wholesalers,
+                        and admins.
+                    </div>
+                </section>
+
+                <h2 id="system-overview">System Overview</h2>
+                <p>Architecture: Django backend with REST API, USSD interface, SMS notifications, and M-Pesa payment
+                    integration.
+                    Technologies: Python, Django, Django REST Framework, PostgreSQL/SQLite, SMSLeopard for SMS, Daraja
+                    for M-Pesa.
+                    Dependencies: Python 3.12, pip packages (django, djangorestframework, python-dotenv, requests).</p>
+
+                <div class="diagram">
+                    <img src="images/SAD.png" alt="System Architecture Diagram">
+                </div>
+
+                <h2 id="installation">Installation Guide</h2>
+                <p>Prerequisites: Python 3.12, virtual environment, Git.
+                    System Requirements: 4GB RAM, 20GB storage, Ubuntu/Linux OS.
+                    Installation Steps:</p>
+                <ol>
+                    <li>Clone the repository: git clone &lt;repo-url&gt;</li>
+                    <li>Create virtual environment: python -m venv mlimizoneenv</li>
+                    <li>Activate: source mlimizoneenv/bin/activate</li>
+                    <li>Install dependencies: pip install -r requirements.txt</li>
+                    <li>Run migrations: python manage.py makemigrations && python manage.py migrate</li>
+                    <li>Start server: python manage.py runserver</li>
+                </ol>
+
+                <h2 id="configuration">Configuration Guide</h2>
+                <p>Parameters: Update settings.py with database details.
+                    Environment Setup: Create .env file with SMS and M-Pesa keys (e.g., USERNAME_SMS,
+                    DARJA_CONSUMER_KEY).
+                    External Service Integration: SMSLeopard for SMS, Daraja for M-Pesa.</p>
+
+                <div class="code-block">
+                    <code>
+# Example .env
+USERNAME_SMS=jP8itGTw68oPPavkGqaW
+PASSWORD=3MiJWaaHC2QvyWg4wXfzMR33C6YxSMMU2BcxhHnb
+SOURCE=AkiraChix
+                    </code>
+                    <button class="copy-button"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+
+                <h2 id="usage">Usage Guide</h2>
+                <p>User Interface Overview: USSD-based menu for mobile access.
+                    Core Features: Registration, market prices, produce listing, booking, payment.
+                    Advanced Features: SMS notifications, admin dashboard for monitoring.
+                    Troubleshooting: Common issues like invalid phone numbers or no market prices, with solutions.</p>
+
+                <div class="expandable">
+                    <i class="fas fa-chevron-down"></i> Expand for Common Issues
+                    <div class="expandable-content">
+                        <p>Issue: No market price found.</p>
+                        <p>Solution: Ensure market prices are seeded in the admin panel.</p>
+                    </div>
+                </div>
+
+                <h2 id="api">API Documentation</h2>
+                <p>Endpoints: /api/croplistings, /api/orders, /api/payments, etc.
+                    Request/Response Formats: JSON, with authentication via API keys.
+                    Authentication: Token-based for admins and users.</p>
+
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="1">GET /api/crops</button>
+                        <button class="tab-button" data-tab="2">POST /api/orders</button>
+                    </div>
+                    <div class="tab-content active" data-tab="1">
+                        <p>Returns list of crops.</p>
+                        <div class="code-block">
+                            <code>
+[
+  {"crop_id": 1, "crop_name": "Maize"}
+]
+                            </code>
+                            <button class="copy-button"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                    </div>
+                    <div class="tab-content" data-tab="2">
+                        <p>Creates a new order.</p>
+                    </div>
+                </div>
+
+                <h2 id="database">Database Schema</h2>
+                <p>Entity-Relationship Diagram: Users connected to listings, orders, and payments.</p>
+                <div class="diagram">
+                    <img src="images/erd.png" alt="ER Diagram">
+                </div>
+                <p>Tables: User, Crop, MarketPrice, ProduceListing, Cart, Order, Payment, SMSLogs, USSDSession.</p>
+
+                <h2 id="testing">Testing</h2>
+                <p>Test Plan: Unit tests for models, integration tests for USSD flows.
+                    Test Cases: Registration, listing produce, booking, payment initiation.
+                    Results: 95% coverage, all critical paths pass.</p>
+
+                <h2 id="deployment">Deployment</h2>
+                <p>Process: Use Heroku or AWS, set environment variables, run migrations.
+                    Release Notes: Version 1.0 - Initial release with USSD and M-Pesa integration.
+                    Known Issues: None reported.</p>
+
+                <h2 id="support">Support & Maintenance</h2>
+                <p>Troubleshooting: Check logs for errors, restart server.
+                    FAQs: How to register? Dial *123#.
+                    Contact Info: support@mlimizone.com</p>
+
+                <h2 id="change-log">Change Log</h2>
+                <p>Version 1.0: Initial release.
+                    Version 1.1: Added four crops support.</p>
+
+                <h2 id="glossary">Glossary</h2>
+                <p>USSD: Unstructured Supplementary Service Data - Mobile menu system.
+                    M-Pesa: Mobile payment service.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const expandables = document.querySelectorAll('.expandable');
+        expandables.forEach(expandable => {
+            expandable.addEventListener('click', () => {
+                const content = expandable.querySelector('.expandable-content');
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.querySelector(`.tab-content[data-tab="${tabId}"]`).classList.add('active');
+            });
+        });
+
+        const copyButtons = document.querySelectorAll('.copy-button');
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const code = button.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerHTML = '<i class="fas fa-check"></i> Copied';
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
